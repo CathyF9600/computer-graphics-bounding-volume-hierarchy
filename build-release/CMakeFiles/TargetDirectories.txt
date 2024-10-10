@@ -1,0 +1,14 @@
+/Users/yuchunfeng/Documents/CSC317/A4/computer-graphics-bounding-volume-hierarchy/build-release/CMakeFiles/core.dir
+/Users/yuchunfeng/Documents/CSC317/A4/computer-graphics-bounding-volume-hierarchy/build-release/CMakeFiles/rays.dir
+/Users/yuchunfeng/Documents/CSC317/A4/computer-graphics-bounding-volume-hierarchy/build-release/CMakeFiles/distances.dir
+/Users/yuchunfeng/Documents/CSC317/A4/computer-graphics-bounding-volume-hierarchy/build-release/CMakeFiles/intersections.dir
+/Users/yuchunfeng/Documents/CSC317/A4/computer-graphics-bounding-volume-hierarchy/build-release/CMakeFiles/edit_cache.dir
+/Users/yuchunfeng/Documents/CSC317/A4/computer-graphics-bounding-volume-hierarchy/build-release/CMakeFiles/rebuild_cache.dir
+/Users/yuchunfeng/Documents/CSC317/A4/computer-graphics-bounding-volume-hierarchy/build-release/glad/CMakeFiles/glad.dir
+/Users/yuchunfeng/Documents/CSC317/A4/computer-graphics-bounding-volume-hierarchy/build-release/glad/CMakeFiles/edit_cache.dir
+/Users/yuchunfeng/Documents/CSC317/A4/computer-graphics-bounding-volume-hierarchy/build-release/glad/CMakeFiles/rebuild_cache.dir
+/Users/yuchunfeng/Documents/CSC317/A4/computer-graphics-bounding-volume-hierarchy/build-release/glfw/CMakeFiles/edit_cache.dir
+/Users/yuchunfeng/Documents/CSC317/A4/computer-graphics-bounding-volume-hierarchy/build-release/glfw/CMakeFiles/rebuild_cache.dir
+/Users/yuchunfeng/Documents/CSC317/A4/computer-graphics-bounding-volume-hierarchy/build-release/glfw/src/CMakeFiles/glfw.dir
+/Users/yuchunfeng/Documents/CSC317/A4/computer-graphics-bounding-volume-hierarchy/build-release/glfw/src/CMakeFiles/edit_cache.dir
+/Users/yuchunfeng/Documents/CSC317/A4/computer-graphics-bounding-volume-hierarchy/build-release/glfw/src/CMakeFiles/rebuild_cache.dir
