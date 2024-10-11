@@ -1,6 +1,6 @@
 #include "ray_intersect_box.h"
-#include <algorithm>
 #include <iostream>
+#include <algorithm>
 
 bool ray_intersect_box(
   const Ray & ray,
@@ -10,39 +10,59 @@ bool ray_intersect_box(
 {
   ////////////////////////////////////////////////////////////////////////////
   // Replace with your code here:
-  double t_x_min, t_x_max, t_y_min, t_y_max, t_z_min, t_z_max;
-  if (ray.origin[0] >= 0) {
-      t_x_min = (box.min_corner(0) - ray.origin(0)) / ray.direction(0);
-      t_x_max = (box.max_corner(0) - ray.origin(0)) / ray.direction(0);
+  // Use bounding box intersection algorithm by A. Williams et al listed in
+  // Section 12.3 of Fundamentals of Computer Graphics (3rd)
+  double t_xmin, t_ymin, t_zmin, t_xmax, t_ymax, t_zmax;
+  double x_e, y_e, z_e;
+  double a_x, a_y, a_z;
+
+  x_e = ray.origin[0];
+  y_e = ray.origin[1];
+  z_e = ray.origin[2];
+
+  a_x = 1 / (ray.direction[0]);
+  a_y = 1 / (ray.direction[1]);
+  a_z = 1 / (ray.direction[2]);
+
+  if (a_x >= 0){
+      t_xmin = a_x * (box.min_corner[0] - x_e);
+      t_xmax = a_x * (box.max_corner[0] - x_e);
   } else {
-      t_x_min = (box.max_corner(0) - ray.origin(0)) / ray.direction(0);
-      t_x_max = (box.min_corner(0) - ray.origin(0)) / ray.direction(0);
-  }
-  if (ray.origin[1] >= 0) {
-    t_y_min = (box.min_corner(1) - ray.origin(1)) / ray.direction(1);
-    t_y_max = (box.max_corner(1) - ray.origin(1)) / ray.direction(1);
-  } else { 
-    t_y_min = (box.max_corner(1) - ray.origin(1)) / ray.direction(1);
-    t_y_max = (box.min_corner(1) - ray.origin(1)) / ray.direction(1);
-  }
-  if (ray.origin[2] >= 0) {
-    t_z_min = (box.min_corner(2) - ray.origin(2)) / ray.direction(2);
-    t_z_max = (box.max_corner(2) - ray.origin(2)) / ray.direction(2);
-  } else {
-    t_z_min = (box.max_corner(2) - ray.origin(2)) / ray.direction(2);
-    t_z_max = (box.min_corner(2) - ray.origin(2)) / ray.direction(2);
-  }
-  double max_of_min = std::max({t_x_min, t_y_min, t_z_min});
-  double min_of_max = std::min({ t_x_max, t_y_max, t_z_max});
-  if (max_of_min > min_of_max) {
-    if ((max_of_min <= min_t <= min_of_max)) {    // inside of the box
-      return true;
-    } else if (min_t <= max_of_min && min_of_max <= max_t) { // intersection
-      return true;
-    }
+      t_xmin = a_x * (box.max_corner[0] - x_e);
+      t_xmax = a_x * (box.min_corner[0] - x_e);
   }
 
-  // intersect if max
-  return false;
+  if (a_y >= 0){
+      t_ymin = a_y * (box.min_corner[1] - y_e);
+      t_ymax = a_y * (box.max_corner[1] - y_e);
+  } else {
+      t_ymin = a_y * (box.max_corner[1] - y_e);
+      t_ymax = a_y * (box.min_corner[1] - y_e);
+  }
+
+  // Use negative a_z for min case because ray goes in negative z dir
+  if (a_z >= 0){
+      t_zmin = a_z * (box.min_corner[2] - z_e);
+      t_zmax = a_z * (box.max_corner[2] - z_e);
+  } else {
+      t_zmin = a_z * (box.max_corner[2] - z_e);
+      t_zmax = a_z * (box.min_corner[2] - z_e);
+  }
+
+  if (std::max({t_xmin, t_ymin, t_zmin}) <= std::min({t_xmax, t_ymax, t_zmax})) {
+      // If min_t within box, treat as hit because ray could hit something inside the box
+      //min_t_pt is in box if min_t is within interval
+    if (std::max({t_xmin, t_ymin, t_zmin}) <= min_t && min_t <= std::min({t_xmax, t_ymax, t_zmax})) {
+        return true;
+    } else if (min_t <= std::max({t_xmin, t_ymin, t_zmin}) && std::max({t_xmin, t_ymin, t_zmin}) <= max_t) {
+    // Intersection point is at entry point
+        return true;
+    } else {
+        return false;
+    }
+  } else {
+      return false;
+  }
+
   ////////////////////////////////////////////////////////////////////////////
 }

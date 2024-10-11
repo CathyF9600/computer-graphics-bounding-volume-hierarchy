@@ -19,7 +19,7 @@ AABBTree::AABBTree(
       insert_box_into_box(objects[1]->box, this->box);
       right = objects[1];
     }
-    return;
+    return; // base case: return leaf as object type, not an AABBTree
   }
   if (a_depth == 0) {
     this->box.max_corner = objects[0]->box.max_corner;
@@ -70,7 +70,12 @@ AABBTree::AABBTree(
   }
   
   // recursive calling constructor
-  left = std::make_shared<AABBTree>(left_tree, depth+1);
-  right = std::make_shared<AABBTree>(right_tree, depth+1);
+  this->left = std::make_shared<AABBTree>(left_tree, depth+1);
+  this->right = std::make_shared<AABBTree>(right_tree, depth+1);
+
+  /*    root (tree)
+  left(tree)  right(tree)
+
+  */
   ////////////////////////////////////////////////////////////////////////////
 }

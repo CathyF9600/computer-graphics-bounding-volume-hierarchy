@@ -25,16 +25,13 @@ bool ray_intersect_triangle_mesh_brute_force(
     Eigen::Vector3d v1 = V.row(F(i, 1)); //F i-th row, 1st col
     Eigen::Vector3d v2 = V.row(F(i, 2)); //F i-th row, 2nd col
     potential_hit = ray_intersect_triangle(ray, v0, v1, v2, min_t, max_t, t);
-    // if (i == 757) {
-    //   std::cout << 'hit' << hit; 
-    // }
-    if (potential_hit && t < hit_t && min_t <= t <= max_t ) {
+
+    if (potential_hit && t < hit_t) {
       hit = true;
       hit_t = t;
       hit_f = i;
-      return true;
     }
   }
-  return false;
+  return hit;
   ////////////////////////////////////////////////////////////////////////////
 }

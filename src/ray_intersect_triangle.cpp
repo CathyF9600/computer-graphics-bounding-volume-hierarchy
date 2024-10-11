@@ -15,11 +15,10 @@ bool ray_intersect_triangle(
 {
   ////////////////////////////////////////////////////////////////////////////
   // Replace with your code here:
-  // A__t1 : t1 = A -> B
-  //  \ t2 : t2 = A -> C
+  //  t1 = A -> B
+  //  t2 = A -> C
   // e = [t1 t2 -d].T [alpha beta t]
   // [alpha beta t] = inverse([t1 t2 -d].T) * e 
-  t = 0;
   Eigen::Vector3d t1 = (B - A).transpose();
   Eigen::Vector3d t2 = (C - A).transpose();
   Eigen::Vector3d d = ray.direction;
@@ -45,7 +44,7 @@ bool ray_intersect_triangle(
     n = -n.normalized(); // reverse the normal vector
   }
 
-  if ((min_t <= t <= max_t) && (alpha >= 0) && (beta >= 0) && (alpha + beta <= 1)) {
+  if ((t > min_t) && (t < max_t) && (alpha >= 0) && (beta >= 0) && (alpha + beta <= 1)) {
     // the bound
     return true;
   } else {
